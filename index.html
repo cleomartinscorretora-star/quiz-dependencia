@@ -238,7 +238,7 @@
 
                 <p style="text-align: center; font-size: 0.9rem;"><em>Atendimento individual, online. Agenda com vagas limitadas.</em></p>
 
-                <a href="https://pay.kiwify.com.br/X773V3E" class="btn" target="_blank">GARANTIR MINHA SESSÃO</a>
+                <a href="https://pay.kiwify.com.br/RT8Alt7" class="btn" target="_blank">QUERO A MINHA SESSÃO DE CLAREZA</a>
                 
                 <p style="text-align: center; margin-top: 1rem; font-size: 0.9rem;">
                     Você pode continuar tentando entender sozinha.<br>
@@ -329,4 +329,113 @@
                 options: [
                     { text: "Útil, forte e indispensável", axis: "A" },
                     { text: "Presente, intensa e colada nele", axis: "B" },
-                    { text: "Atenta, perfeita e vigil
+                    { text: "Atenta, perfeita e vigilante", axis: "C" },
+                    { text: "Dócil, invisível e fácil de lidar", axis: "D" }
+                ]
+            },
+            // Pergunta 7 (Desempate - Vale 2 pontos)
+            {
+                text: "Para finalizar, das 4 frases abaixo, qual mexe mais com você neste momento?",
+                options: [
+                    { text: "Você está carregando todo mundo nas costas.", axis: "A" },
+                    { text: "Você está sozinha mesmo estando acompanhada.", axis: "B" },
+                    { text: "Você não consegue confiar de verdade.", axis: "C" },
+                    { text: "Você está invisível dentro da sua própria relação.", axis: "D" }
+                ]
+            }
+        ];
+
+        // RESULTADOS
+        const resultsData = {
+            "A": {
+                title: "A Protetora Incansável",
+                quote: "Se eu não for necessária, posso deixar de ser escolhida.",
+                text: "Você aprendeu a amar cuidando. Resolve, orienta, sustenta. Muitas vezes assume o papel de forte mesmo quando está exausta. Existe uma parte sua que acredita que ser indispensável é a forma mais segura de manter alguém ao seu lado. O problema é que amor construído na necessidade gera cansaço, não parceria.",
+                origin: "Esse padrão geralmente nasce quando, cedo demais, você precisou ser 'madura' ou emocionalmente responsável por alguém da família."
+            },
+            "B": {
+                title: "A Buscadora de Confirmação",
+                quote: "Se ele se afastar, eu fico sozinha comigo.",
+                text: "Você sente intensamente quando há distância. Pequenos afastamentos geram grandes inseguranças. Existe um medo profundo de não ser escolhida, de não ser prioridade. Então você tenta se ajustar, se aproximar mais, entender demais... tudo para evitar o vazio. Mas quanto mais você tenta garantir o vínculo, mais ansiedade você sente.",
+                origin: "Esse padrão geralmente tem raízes em uma infância onde o afeto foi inconstante ou onde você sentiu solidão emocional."
+            },
+            "C": {
+                title: "A Vigilante Oculta",
+                quote: "Eu não confio, mas não consigo ir embora.",
+                text: "Você ama desconfiando. Analisa gestos, palavras, horários. No fundo, você está sempre esperando o momento em que a 'verdade' vai aparecer e você será decepcionada. Essa hipervigilância te dá uma falsa sensação de controle, mas te impede de relaxar e entregar seu coração de verdade. É exaustivo ser a detetive da própria relação.",
+                origin: "Geralmente ligado a quebras de confiança precoces ou a um ambiente familiar onde a mentira ou a traição eram presentes."
+            },
+            "D": {
+                title: "A Adaptável Silenciosa",
+                quote: "Se eu for eu mesma, ele vai embora.",
+                text: "Você se diminui para caber no mundo dele. Evita conflitos a qualquer custo, engole suas vontades e molda sua personalidade para ser a 'mulher ideal'. Você tem pavor de ser um peso ou de incomodar. O problema é que, ao tentar agradar a todo custo, você se torna invisível dentro da própria relação.",
+                origin: "Comum em histórias onde a criança aprendeu que só recebia afeto quando era 'boazinha', obediente ou invisível."
+            }
+        };
+
+        let currentQuestion = 0;
+        let scores = { "A": 0, "B": 0, "C": 0, "D": 0 };
+
+        function startQuiz() {
+            document.getElementById('landing').classList.add('hidden');
+            document.getElementById('quiz').classList.remove('hidden');
+            showQuestion();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showQuestion() {
+            const q = questions[currentQuestion];
+            document.getElementById('q-number').innerText = currentQuestion + 1;
+            
+            const container = document.getElementById('question-container');
+            container.innerHTML = `<h2 class="question-text">${q.text}</h2>`;
+            
+            q.options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'option';
+                btn.innerText = opt.text;
+                btn.onclick = () => selectOption(opt.axis);
+                container.appendChild(btn);
+            });
+            
+            container.classList.remove('fade-in');
+            void container.offsetWidth; 
+            container.classList.add('fade-in');
+        }
+
+        function selectOption(axis) {
+            // Lógica de Peso: Se for a última pergunta (índice 6), vale 2 pontos.
+            let points = (currentQuestion === 6) ? 2 : 1;
+            scores[axis] += points;
+            
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                showQuestion();
+            } else {
+                showResult();
+            }
+        }
+
+        function showResult() {
+            document.getElementById('quiz').classList.add('hidden');
+            document.getElementById('result').classList.remove('hidden');
+            
+            // Lógica de Vencedor
+            let winner = Object.keys(scores).reduce((a, b) => scores[a] >= scores[b] ? a : b);
+            const data = resultsData[winner];
+
+            document.getElementById('result-title').innerText = data.title;
+            document.getElementById('result-quote').innerText = `"${data.quote}"`;
+            document.getElementById('result-text').innerText = data.text;
+            document.getElementById('result-origin').innerText = data.origin;
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // Dispara Pixel de Lead
+            if(typeof fbq === 'function') {
+                fbq('track', 'Lead'); 
+            }
+        }
+    </script>
+</body>
+</html>
