@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa Afetivo | Cleo Martins</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- PALETA DE CORES E ESTILO GERAL --- */
+        :root {
+            --cor-fundo: #F7F4EF; /* Linho claro */
+            --cor-texto: #4A2F26; /* Marrom Cacau Profundo */
+            --cor-destaque: #C38A6B; /* Terracota Suave */
+            --cor-branco: #FFFFFF;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto);
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            padding: 2rem 1.5rem;
+            background-color: var(--cor-fundo);
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--cor-texto);
+            margin-bottom: 1rem;
+        }
+
+        h1 { font-size: 2rem; font-weight: 700; line-height: 1.2; }
+        h2 { font-size: 1.5rem; font-weight: 600; }
+        h3 { font-size: 1.2rem; font-weight: 600; color: var(--cor-destaque); margin-top: 1.5rem; }
+
+        p { margin-bottom: 1.2rem; font-size: 1.05rem; font-weight: 400; }
+        
+        .destaque-texto { font-weight: 700; }
+
+        /* --- BOTÕES --- */
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 18px;
+            background-color: var(--cor-texto);
+            color: var(--cor-fundo);
+            text-align: center;
+            border: none;
+            border-radius: 4px; 
+            font-family: 'Lato', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            margin-top: 2rem;
+            transition: opacity 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        /* --- LISTAS E CARDS --- */
+        ul { list-style: none; margin-bottom: 2rem; }
+        li {
+            margin-bottom: 0.8rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        li::before {
+            content: "•";
+            color: var(--cor-destaque);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+            line-height: 1.5rem;
+        }
+
+        .card {
+            background-color: #fff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(74, 47, 38, 0.05);
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--cor-destaque);
+        }
+
+        /* --- QUIZ --- */
+        .question-step { margin-bottom: 1rem; font-size: 0.9rem; color: var(--cor-destaque); text-transform: uppercase; letter-spacing: 1px;}
+        .question-text { font-size: 1.3rem; margin-bottom: 2rem; font-family: 'Playfair Display', serif; }
+        
+        .option {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 12px;
+            background-color: #fff;
+            border: 1px solid #e0dcd5;
+            border-radius: 4px;
+            text-align: left;
+            cursor: pointer;
+            font-size: 1rem;
+            color: var(--cor-texto);
+            transition: all 0.2s ease;
+        }
+
+        .option:hover {
+            border-color: var(--cor-texto);
+            background-color: #fcfbf9;
+        }
+
+        /* --- UTILITÁRIOS --- */
+        .hidden { display: none; }
+        .fade-in { animation: fadeIn 0.8s ease; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .result-box {
+            background-color: #fff;
+            padding: 2rem;
+            border-top: 1px solid var(--cor-destaque);
+            border-bottom: 1px solid var(--cor-destaque);
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .quote {
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--cor-destaque);
+            margin: 1rem 0;
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .footer {
+            margin-top: 2rem;
+            text-align: center;
+            font-size: 0.8rem;
+            opacity: 0.7;
+            padding-top: 1rem;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <section id="landing" class="fade-in">
+            <h1>Você ama... mas se sente exausta dentro das suas relações?</h1>
+            <p style="font-size: 1.2rem;">Talvez não seja sobre quem você escolhe. Talvez seja sobre o que você aprendeu a aceitar.</p>
+            
+            <div style="margin: 2rem 0;">
+                <p><strong>Responda com sinceridade:</strong></p>
+                <ul>
+                    <li>Seu corpo fica em alerta quando ele se afasta?</li>
+                    <li>Você se esforça para manter a relação em equilíbrio sozinha?</li>
+                    <li>Se adapta para evitar conflito, mesmo se machucando?</li>
+                    <li>Sente medo de ser trocada ou enganada?</li>
+                    <li>Permanece mesmo quando sabe que não está feliz?</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <p style="font-size: 0.9rem; margin-bottom: 0;">Esse teste foi construído a partir de padrões emocionais que observo há anos no consultório. Mulheres fortes, inteligentes... que repetem histórias parecidas sem entender por quê.</p>
+            </div>
+
+            <p><strong>Em poucos minutos você vai descobrir:</strong></p>
+            <ul>
+                <li>Qual padrão está mais ativo hoje</li>
+                <li>Que tipo de ferida emocional ele revela</li>
+                <li>Como isso influencia suas escolhas</li>
+                <li>E qual é o próximo passo para interromper esse ciclo</li>
+            </ul>
+
+            <div style="background-color: rgba(195, 138, 107, 0.1); padding: 1rem; border-radius: 4px; margin: 2rem 0; text-align: center;">
+                <p style="margin:0; font-size: 0.9rem;"><em>Este teste não define quem você é. Ele revela o mecanismo que você aprendeu para se proteger.</em></p>
+            </div>
+
+            <button class="btn" onclick="startQuiz()">COMEÇAR MEU MAPA AFETIVO</button>
+        </section>
+
+
+        <section id="quiz" class="hidden">
+            <div class="question-step">Pergunta <span id="q-number">1</span> de 6</div>
+            <div id="question-container" class="fade-in">
+                </div>
+        </section>
+
+
+        <section id="result" class="hidden fade-in">
+            <p style="text-align: center; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem;">Seu Padrão Dominante é:</p>
+            <h1 id="result-title" style="text-align: center; color: var(--cor-destaque); margin-bottom: 0.5rem;">Título do Resultado</h1>
+            
+            <div class="quote" id="result-quote">"Frase de impacto inconsciente"</div>
+
+            <div class="result-box">
+                <p id="result-text">Texto do diagnóstico...</p>
+                <p id="result-origin" style="margin-top: 1.5rem; font-weight: 700;">A Origem: ...</p>
+            </div>
+
+            <div id="retention-block">
+                <h3>1. Validação</h3>
+                <p>Você não é "problemática". Você só repete um padrão que aprendeu a funcionar assim para sobreviver emocionalmente.</p>
+
+                <h3>2. A Realidade</h3>
+                <p>Mas preciso ser honesta: identificar o padrão não é curá-lo. Enquanto essa ferida estiver ativa no seu inconsciente, você continuará atraindo parceiros que confirmam esse medo.</p>
+
+                <h3>3. O Convite</h3>
+                <p>Para romper esse ciclo e parar de repetir a história das mulheres da sua família, precisamos ir à raiz.</p>
+                
+                <p>Na <strong>Sessão de Clareza</strong>, nós desenhamos o seu mapa emocional, identificamos a origem sistêmica dessa dor e traçamos o caminho para você se relacionar a partir da sua força, e não da sua falta.</p>
+
+                <a href="SEU_LINK_DE_AGENDAMENTO_AQUI" class="btn">QUERO AGENDAR MINHA SESSÃO</a>
+                
+                <div style="text-align: center; margin-top: 1rem;">
+                    <a href="https://www.instagram.com/cleomartins_/" target="_blank" style="color: var(--cor-texto); font-size: 0.9rem; text-decoration: none;">Voltar para o Instagram</a>
+                </div>
+            </div>
+
+            <div style="margin-top: 4rem; border-top: 1px solid #e0dcd5; padding-top: 2rem;">
+                <div style="display: flex; align-items: flex-start; gap: 1.5rem; flex-wrap: wrap;">
+                    <div style="flex: 0 0 100px;">
+                        <img src="https://placehold.co/100x100?text=Foto" alt="Cleo Martins" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 2px solid var(--cor-destaque);">
+                    </div>
+
+                    <div style="flex: 1;">
+                        <h3 style="margin-top: 0; color: var(--cor-texto);">Quem é Cleo Martins?</h3>
+                        <p style="font-size: 0.95rem; margin-bottom: 0.8rem;">
+                            Sou <strong>Psicoterapeuta Integrativa</strong>, especialista em dinâmicas de relacionamento e padrões de repetição afetiva.
+                        </p>
+                        <p style="font-size: 0.95rem; margin-bottom: 0.8rem;">
+                            A integração do Genograma, da hipnose sistêmica e da psicossomática feminina deu origem ao <strong>Método DNA Feminino</strong>.
+                        </p>
+                        <p style="font-size: 0.95rem; margin-bottom: 0.8rem;">
+                            Um modelo terapêutico estruturado para mapear a raiz emocional dos padrões afetivos, compreender a influência da história familiar e direcionar um processo de transformação com clareza e profundidade.
+                        </p>
+                        <p style="font-size: 0.95rem; margin-bottom: 0;">
+                            Não trabalho apenas o sintoma atual. Investigo a estrutura emocional que sustenta a repetição. Aqui, você encontra método, direcionamento e acompanhamento sério para interromper ciclos que parecem não ter fim.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <div class="footer">
+            <p>&copy; 2026 Cleo Martins | Psicoterapeuta Integrativa</p>
+        </div>
+
+    </div>
+
+    <script>
+        // DADOS DO QUIZ
+        const questions = [
+            {
+                text: "O que mais te cansa hoje em um relacionamento?",
+                options: [
+                    { text: "Ter que resolver tudo e sentir que carrego ele nas costas", axis: "A" },
+                    { text: "A incerteza de não saber se ele vai estar lá amanhã", axis: "B" },
+                    { text: "A desconfiança e a necessidade de ficar sempre alerta", axis: "C" },
+                    { text: "A sensação de pisar em ovos para não desagradar", axis: "D" }
+                ]
+            },
+            {
+                text: "Para você, intimidade segura parece ser:",
+                options: [
+                    { text: "Cuidar dele e garantir que ele precise de mim", axis: "A" },
+                    { text: "Ter a certeza constante de que está tudo bem entre nós", axis: "B" },
+                    { text: "Poder observar e analisar sem ser enganada", axis: "C" },
+                    { text: "Me adaptar para manter a harmonia e a paz", axis: "D" }
+                ]
+            },
+            {
+                text: "Quando surge um conflito, o que mais ativa em você?",
+                options: [
+                    { text: "A necessidade de consertar tudo rapidamente", axis: "A" },
+                    { text: "O medo paralisante de que isso seja o começo do fim", axis: "B" },
+                    { text: "A desconfiança de que pode haver algo escondido", axis: "C" },
+                    { text: "A vontade de ceder imediatamente para evitar que ele se afaste", axis: "D" }
+                ]
+            },
+            {
+                text: "Se ele cresce, evolui e se torna mais independente, você sente:",
+                options: [
+                    { text: "Orgulho, mas também um desconforto difícil de explicar (medo de não ser útil)", axis: "A" },
+                    { text: "Insegurança profunda sobre seu lugar na vida dele", axis: "B" },
+                    { text: "Necessidade de vigiar se essa mudança altera o comportamento dele", axis: "C" },
+                    { text: "Medo de que você não seja mais tão 'necessária' quanto antes", axis: "D" }
+                ]
+            },
+            {
+                text: "Quando você pensa em terminar um relacionamento ruim, o que mais pesa?",
+                options: [
+                    { text: "A sensação de que ele pode se perder ou não conseguir sem mim", axis: "A" },
+                    { text: "O vazio insuportável e a solidão que imagino sentir", axis: "B" },
+                    { text: "A dúvida cruel se ele realmente errou ou se eu estou exagerando", axis: "C" },
+                    { text: "O medo de nunca mais encontrar alguém que me aceite", axis: "D" }
+                ]
+            },
+            {
+                text: "No fundo, lá na sua intimidade, você acredita que para ser amada você precisa ser:",
+                options: [
+                    { text: "Útil, forte e indispensável", axis: "A" },
+                    { text: "Presente, intensa e colada nele", axis: "B" },
+                    { text: "Atenta, perfeita e vigilante", axis: "C" },
+                    { text: "Dócil, invisível e fácil de lidar", axis: "D" }
+                ]
+            }
+        ];
+
+        // RESULTADOS
+        const resultsData = {
+            "A": {
+                title: "A Protetora Incansável",
+                quote: "Se eu não for necessária, posso deixar de ser escolhida.",
+                text: "Você aprendeu a amar cuidando. Resolve, orienta, sustenta. Muitas vezes assume o papel de forte mesmo quando está exausta. Existe uma parte sua que acredita que ser indispensável é a forma mais segura de manter alguém ao seu lado. O problema é que amor construído na necessidade gera cansaço, não parceria.",
+                origin: "Esse padrão geralmente nasce quando, cedo demais, você precisou ser 'madura' ou emocionalmente responsável por alguém da família."
+            },
+            "B": {
+                title: "A Buscadora de Confirmação",
+                quote: "Se ele se afastar, eu fico sozinha comigo.",
+                text: "Você sente intensamente quando há distância. Pequenos afastamentos geram grandes inseguranças. Existe um medo profundo de não ser escolhida, de não ser prioridade. Então você tenta se ajustar, se aproximar mais, entender demais... tudo para evitar o vazio. Mas quanto mais você tenta garantir o vínculo, mais ansiedade você sente.",
+                origin: "Esse padrão geralmente tem raízes em uma infância onde o afeto foi inconstante ou onde você sentiu solidão emocional."
+            },
+            "C": {
+                title: "A Vigilante Oculta",
+                quote: "Eu não confio, mas não consigo ir embora.",
+                text: "Você ama desconfiando. Analisa gestos, palavras, horários. No fundo, você está sempre esperando o momento em que a 'verdade' vai aparecer e você será decepcionada. Essa hipervigilância te dá uma falsa sensação de controle, mas te impede de relaxar e entregar seu coração de verdade. É exaustivo ser a detetive da própria relação.",
+                origin: "Geralmente ligado a quebras de confiança precoces ou a um ambiente familiar onde a mentira ou a traição eram presentes."
+            },
+            "D": {
+                title: "A Adaptável Silenciosa",
+                quote: "Se eu for eu mesma, ele vai embora.",
+                text: "Você se diminui para caber no mundo dele. Evita conflitos a qualquer custo, engole suas vontades e molda sua personalidade para ser a 'mulher ideal'. Você tem pavor de ser um peso ou de incomodar. O problema é que, ao tentar agradar a todo custo, você se torna invisível dentro da própria relação.",
+                origin: "Comum em histórias onde a criança aprendeu que só recebia afeto quando era 'boazinha', obediente ou invisível."
+            }
+        };
+
+        let currentQuestion = 0;
+        let scores = { "A": 0, "B": 0, "C": 0, "D": 0 };
+
+        function startQuiz() {
+            document.getElementById('landing').classList.add('hidden');
+            document.getElementById('quiz').classList.remove('hidden');
+            showQuestion();
+            // Scroll suave para o topo
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showQuestion() {
+            const q = questions[currentQuestion];
+            document.getElementById('q-number').innerText = currentQuestion + 1;
+            
+            const container = document.getElementById('question-container');
+            container.innerHTML = `<h2 class="question-text">${q.text}</h2>`;
+            
+            q.options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'option';
+                btn.innerText = opt.text;
+                btn.onclick = () => selectOption(opt.axis);
+                container.appendChild(btn);
+            });
+            
+            container.classList.remove('fade-in');
+            void container.offsetWidth; 
+            container.classList.add('fade-in');
+        }
+
+        function selectOption(axis) {
+            scores[axis]++;
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                showQuestion();
+            } else {
+                showResult();
+            }
+        }
+
+        function showResult() {
+            document.getElementById('quiz').classList.add('hidden');
+            document.getElementById('result').classList.remove('hidden');
+            
+            // Lógica de desempate simples
+            let winner = Object.keys(scores).reduce((a, b) => scores[a] >= scores[b] ? a : b);
+            const data = resultsData[winner];
+
+            document.getElementById('result-title').innerText = data.title;
+            document.getElementById('result-quote').innerText = `"${data.quote}"`;
+            document.getElementById('result-text').innerText = data.text;
+            document.getElementById('result-origin').innerText = data.origin;
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
