@@ -16,7 +16,7 @@
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '497740334725857'); 
+    fbq('init', 'SEU_NUMERO_DO_PIXEL_AQUI'); 
     fbq('track', 'PageView');
     </script>
     <noscript><img height="1" width="1" style="display:none"
@@ -156,6 +156,39 @@
         
         .check-list li { margin-bottom: 0.5rem; }
 
+        /* --- DEPOIMENTO --- */
+        .testimonial-box {
+            background-color: #fff;
+            padding: 1.8rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+            border: 1px solid #e0dcd5;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(74, 47, 38, 0.05);
+        }
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+        .stars {
+            color: #d4af37;
+            font-size: 1.2rem;
+        }
+        .testimonial-text {
+            font-style: italic;
+            font-size: 0.95rem;
+            color: #555;
+            line-height: 1.6;
+        }
+        .testimonial-author {
+            margin-top: 1rem;
+            font-weight: bold;
+            font-size: 0.9rem;
+            color: var(--cor-texto);
+        }
+
         /* UTILITÁRIOS */
         .hidden { display: none; }
         .fade-in { animation: fadeIn 0.8s ease; }
@@ -246,11 +279,18 @@
                         Se ao final da sessão decidirmos que você deve seguir no processo terapêutico completo comigo, o valor de <strong>R$ 197,00 será devolvido como desconto</strong> na sua próxima etapa.
                     </p>
                 </div>
+            </div>
 
-                <p style="text-align: center; margin-top: 1.5rem; font-size: 0.9rem;">
-                    Você pode continuar tentando entender sozinha.<br>
-                    Ou pode investigar isso com profundidade.
+            <div class="testimonial-box">
+                <div class="testimonial-header">
+                    <div class="stars">★★★★★</div>
+                    <span style="font-size: 0.8rem; color: #888; text-transform: uppercase; letter-spacing: 1px;">Relato Real</span>
+                </div>
+                <p class="testimonial-text">
+                    "Tô impressionada com o resultado deste teste. Resolvi fazer só por curiosidade e me surpreendi positivamente, mas por outro lado fiquei muito pensativa. Eu nunca imaginei que fosse a adaptável silenciosa... passou um filme na minha cabeça e agendei a sessão com a Cleo.<br><br>
+                    Na sessão comecei a me lembrar da infância. Quando meu pai chegava em casa cansado, ele dizia que se eu quisesse ficar perto dele tinha que ficar quietinha. Isso explica por que me sinto tão oprimida numa relação com um marido irritadiço e reclamão... e eu sempre sendo paciente e relevando... nunca conseguindo me posicionar... agora vamos trabalhar pra mudar isso."
                 </p>
+                <p class="testimonial-author">- Paciente Anônima (após o teste e a sessão)</p>
             </div>
 
             <div style="margin-top: 4rem; border-top: 1px solid #e0dcd5; padding-top: 2rem;">
