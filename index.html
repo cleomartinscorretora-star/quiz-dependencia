@@ -1,488 +1,756 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mapa Afetivo |Cleo Louzada</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mapa Afetivo · Cleo Louzada</title>
 
-    <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', 'SEU_NUMERO_DO_PIXEL_AQUI'); 
-    fbq('track', 'PageView');
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=SEU_NUMERO_DO_PIXEL_AQUI&ev=PageView&noscript=1"
-    /></noscript>
-    <style>
-        /* --- ESTILO GERAL --- */
-        :root {
-            --cor-fundo: #F7F4EF;
-            --cor-texto: #4A2F26;
-            --cor-destaque: #C38A6B;
-            --cor-branco: #FFFFFF;
-        }
+<!-- Facebook Domain Verification - cleomartins.site -->
+<meta name="facebook-domain-verification" content="lr0i13z3sx5j0qbrun30om7bs4b3wd" />
+<!-- Facebook Domain Verification - cleolouzada.com.br -->
+<meta name="facebook-domain-verification" content="7wg8t9hvpny6zdeuc4vkxtobsvvluv" />
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+<!-- Meta Pixel -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '497740334725857');
+fbq('track', 'PageView');
+</script>
+<!-- Fim Meta Pixel -->
 
-        body {
-            font-family: 'Lato', sans-serif;
-            background-color: var(--cor-fundo);
-            color: var(--cor-texto);
-            line-height: 1.6;
-            display: flex;
-            justify-content: center;
-            min-height: 100vh;
-        }
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-        .container {
-            width: 100%;
-            max-width: 600px;
-            padding: 2rem 1.5rem;
-            background-color: var(--cor-fundo);
-        }
+<style>
+  :root {
+    --bg: #F7F4EF;
+    --surface: #FDFAF6;
+    --terra: #A8613A;
+    --terra-light: rgba(168,97,58,0.10);
+    --terra-border: rgba(168,97,58,0.20);
+    --choco: #4E2B15;
+    --choco-mid: #6D4C3D;
+    --choco-light: rgba(78,43,21,0.06);
+    --fawn: #D6B89E;
+    --outline: rgba(217,194,182,0.4);
+    --tx1: #4E2B15;
+    --tx2: #6D4C3D;
+    --tx3: #9C7B6B;
+    --tx4: #C2AFA6;
+  }
 
-        h1, h2, h3 { font-family: 'Playfair Display', serif; color: var(--cor-texto); margin-bottom: 1rem; }
-        h1 { font-size: 2rem; font-weight: 700; line-height: 1.2; }
-        h2 { font-size: 1.5rem; font-weight: 600; }
-        h3 { font-size: 1.3rem; font-weight: 600; color: var(--cor-destaque); margin-top: 1.5rem; }
-        
-        p { margin-bottom: 1.2rem; font-size: 1.05rem; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
-        .btn {
-            display: block;
-            width: 100%;
-            padding: 18px;
-            background-color: var(--cor-texto);
-            color: var(--cor-fundo);
-            text-align: center;
-            border: none;
-            border-radius: 4px;
-            font-family: 'Lato', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 700;
-            cursor: pointer;
-            text-decoration: none;
-            margin-top: 2rem;
-            transition: opacity 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        .btn:hover { opacity: 0.9; }
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background: var(--bg);
+    color: var(--tx1);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
 
-        .card {
-            background-color: #fff;
-            padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(74, 47, 38, 0.05);
-            margin-bottom: 2rem;
-            border-left: 4px solid var(--cor-destaque);
-        }
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(247,244,239,0.90);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--outline);
+    padding: 16px 32px;
+  }
+  nav img { width: 110px; height: auto; display: block; }
 
-        /* --- QUIZ --- */
-        .question-step { margin-bottom: 1rem; font-size: 0.9rem; color: var(--cor-destaque); text-transform: uppercase; letter-spacing: 1px;}
-        .question-text { font-size: 1.3rem; margin-bottom: 2rem; font-family: 'Playfair Display', serif; }
-        
-        .option {
-            display: block;
-            width: 100%;
-            padding: 15px;
-            margin-bottom: 12px;
-            background-color: #fff;
-            border: 1px solid #e0dcd5;
-            border-radius: 4px;
-            text-align: left;
-            cursor: pointer;
-            font-size: 1rem;
-            color: var(--cor-texto);
-            transition: all 0.2s ease;
-        }
-        .option:hover { border-color: var(--cor-texto); background-color: #fcfbf9; }
+  /* CONTAINER */
+  .wrap {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
 
-        /* --- RESULTADO E VENDAS --- */
-        .result-box {
-            background-color: #fff;
-            padding: 2rem;
-            border-top: 1px solid var(--cor-destaque);
-            border-bottom: 1px solid var(--cor-destaque);
-            margin: 2rem 0;
-            text-align: left;
-        }
+  /* TYPOGRAPHY */
+  .serif { font-family: 'Playfair Display', serif; }
+  .label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .4em;
+    text-transform: uppercase;
+    color: var(--terra);
+  }
 
-        .quote {
-            font-style: italic;
-            font-size: 1.1rem;
-            color: var(--cor-destaque);
-            margin: 1rem 0;
-            text-align: center;
-            font-family: 'Playfair Display', serif;
-        }
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(26px, 5vw, 38px);
+    font-weight: 500;
+    line-height: 1.2;
+    color: var(--choco);
+    margin-bottom: 20px;
+  }
 
-        .print-instruction {
-            background-color: #fdf6f2;
-            border: 1px dashed var(--cor-destaque);
-            padding: 1rem;
-            margin-top: 1.5rem;
-            font-size: 0.9rem;
-            text-align: center;
-            color: var(--cor-texto);
-            border-radius: 4px;
-        }
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(20px, 4vw, 28px);
+    font-weight: 500;
+    color: var(--choco);
+    margin-bottom: 16px;
+  }
 
-        .sales-box {
-            background-color: #fff;
-            padding: 2rem;
-            border-radius: 8px;
-            margin-top: 2rem;
-            border: 1px solid #e0dcd5;
-        }
+  h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--terra);
+    margin-bottom: 12px;
+  }
 
-        .price-tag {
-            font-size: 1.4rem;
-            text-align: center;
-            margin: 1.5rem 0;
-            padding: 1rem;
-            background-color: #faf8f5;
-            border-radius: 4px;
-        }
-        
-        .check-list li { margin-bottom: 0.5rem; }
+  p {
+    font-size: .90rem;
+    line-height: 1.75;
+    color: var(--tx2);
+    margin-bottom: 14px;
+  }
 
-        /* --- DEPOIMENTO --- */
-        .testimonial-box {
-            background-color: #fff;
-            padding: 1.8rem;
-            border-radius: 8px;
-            margin-top: 2rem;
-            border: 1px solid #e0dcd5;
-            position: relative;
-            box-shadow: 0 4px 15px rgba(74, 47, 38, 0.05);
-        }
-        .testimonial-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 1rem;
-        }
-        .stars {
-            color: #d4af37;
-            font-size: 1.2rem;
-        }
-        .testimonial-text {
-            font-style: italic;
-            font-size: 0.95rem;
-            color: #555;
-            line-height: 1.6;
-        }
-        .testimonial-author {
-            margin-top: 1rem;
-            font-weight: bold;
-            font-size: 0.9rem;
-            color: var(--cor-texto);
-        }
+  /* DIVIDER */
+  .divider {
+    width: 40px;
+    height: 1px;
+    background: rgba(168,97,58,0.30);
+    margin: 20px 0;
+  }
 
-        /* UTILITÁRIOS */
-        .hidden { display: none; }
-        .fade-in { animation: fadeIn 0.8s ease; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        
-        .footer { margin-top: 3rem; text-align: center; font-size: 0.8rem; opacity: 0.7; padding-top: 1rem; border-top: 1px solid #e0dcd5;}
-    </style>
+  /* CARD */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--outline);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+  }
+
+  /* LANDING */
+  #landing { animation: fadeUp .6s ease both; }
+
+  .bullets {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+  }
+  .bullets li {
+    font-size: .88rem;
+    color: var(--tx2);
+    padding: 10px 0;
+    border-bottom: 1px solid var(--outline);
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .bullets li:last-child { border-bottom: none; }
+  .bullets li::before {
+    content: '·';
+    color: var(--terra);
+    font-size: 1.4rem;
+    line-height: 1;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .note {
+    background: var(--terra-light);
+    border: 1px solid var(--terra-border);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 24px 0;
+  }
+  .note p {
+    margin: 0;
+    font-size: .82rem;
+    font-style: italic;
+    color: var(--choco-mid);
+  }
+
+  /* BUTTON */
+  .btn {
+    display: block;
+    width: 100%;
+    padding: 16px 24px;
+    background: var(--choco);
+    color: #F7F4EF;
+    text-align: center;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    margin-top: 28px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    transition: opacity .15s;
+    box-shadow: 0 4px 20px rgba(78,43,21,0.18);
+  }
+  .btn:hover { opacity: .85; }
+
+  .btn-terra {
+    background: var(--terra);
+    box-shadow: 0 4px 20px rgba(168,97,58,0.28);
+  }
+
+  /* QUIZ */
+  #quiz { display: none; }
+
+  .progress-wrap {
+    margin-bottom: 28px;
+  }
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+  .progress-bar {
+    height: 2px;
+    background: var(--outline);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--terra);
+    border-radius: 2px;
+    transition: width .4s ease;
+  }
+
+  .question-text {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(18px, 3.5vw, 22px);
+    font-weight: 500;
+    color: var(--choco);
+    line-height: 1.35;
+    margin-bottom: 28px;
+  }
+
+  .option {
+    display: block;
+    width: 100%;
+    padding: 14px 18px;
+    margin-bottom: 10px;
+    background: var(--surface);
+    border: 1px solid var(--outline);
+    border-radius: 9px;
+    text-align: left;
+    cursor: pointer;
+    font-size: .85rem;
+    font-family: 'Montserrat', sans-serif;
+    color: var(--tx2);
+    transition: all .18s;
+    line-height: 1.5;
+  }
+  .option:hover {
+    border-color: var(--terra);
+    background: var(--terra-light);
+    color: var(--choco);
+  }
+
+  /* RESULT */
+  #result { display: none; }
+
+  .result-pattern-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .4em;
+    text-transform: uppercase;
+    color: var(--terra);
+    text-align: center;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .result-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 6vw, 42px);
+    font-weight: 500;
+    color: var(--choco);
+    text-align: center;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+
+  .result-quote {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(16px, 3vw, 20px);
+    color: var(--terra);
+    text-align: center;
+    margin: 20px 0 28px;
+    opacity: .85;
+  }
+
+  .result-box {
+    background: var(--surface);
+    border-top: 2px solid var(--terra);
+    border-bottom: 1px solid var(--outline);
+    padding: 28px 24px;
+    margin: 0 0 24px;
+    border-radius: 0 0 12px 12px;
+  }
+
+  .print-box {
+    background: rgba(168,97,58,0.06);
+    border: 1px dashed rgba(168,97,58,0.35);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-top: 20px;
+    font-size: .78rem;
+    text-align: center;
+    color: var(--choco-mid);
+    line-height: 1.6;
+  }
+
+  /* SALES */
+  .sales-box {
+    background: var(--surface);
+    border: 1px solid var(--outline);
+    border-radius: 12px;
+    padding: 28px 24px;
+    margin-top: 24px;
+  }
+
+  .check-list {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0 24px;
+  }
+  .check-list li {
+    font-size: .85rem;
+    color: var(--tx2);
+    padding: 8px 0;
+    border-bottom: 1px solid var(--outline);
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .check-list li:last-child { border-bottom: none; }
+  .check-list li::before {
+    content: '✓';
+    color: var(--terra);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .price-box {
+    text-align: center;
+    padding: 24px;
+    background: var(--choco-light);
+    border-radius: 10px;
+    margin: 20px 0;
+    border: 1px solid var(--outline);
+  }
+  .price-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    font-weight: 500;
+    color: var(--choco);
+    line-height: 1;
+  }
+  .price-label {
+    font-size: .72rem;
+    color: var(--tx3);
+    margin-top: 6px;
+    letter-spacing: .05em;
+  }
+
+  .cashback-box {
+    background: var(--choco-light);
+    border-left: 3px solid var(--terra);
+    border-radius: 0 8px 8px 0;
+    padding: 16px 18px;
+    margin-top: 20px;
+  }
+  .cashback-box p {
+    margin: 0;
+    font-size: .82rem;
+  }
+  .cashback-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--choco);
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  /* TESTIMONIAL */
+  .testimonial-box {
+    background: var(--surface);
+    border: 1px solid var(--outline);
+    border-radius: 12px;
+    padding: 24px;
+    margin-top: 24px;
+  }
+  .stars { color: #C9A84C; font-size: 1rem; letter-spacing: 2px; }
+  .testimonial-text {
+    font-style: italic;
+    font-size: .85rem;
+    color: var(--tx2);
+    line-height: 1.75;
+    margin: 14px 0 12px;
+  }
+  .testimonial-author {
+    font-size: .75rem;
+    font-weight: 600;
+    color: var(--tx3);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+  }
+
+  /* ABOUT */
+  .about-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    margin-top: 40px;
+    padding-top: 32px;
+    border-top: 1px solid var(--outline);
+    flex-wrap: wrap;
+  }
+  .about-photo {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--terra);
+    flex-shrink: 0;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--choco);
+    padding: 20px 32px;
+    text-align: center;
+    margin-top: 60px;
+  }
+  footer p {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: rgba(217,194,182,0.45);
+    margin: 0;
+  }
+
+  /* HIDDEN */
+  .hidden { display: none !important; }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .fade-up { animation: fadeUp .5s ease both; }
+</style>
 </head>
+
 <body>
 
-    <div class="container">
-        
-        <section id="landing" class="fade-in">
-            <h1>Você ama... mas se sente exausta dentro das suas relações?</h1>
-            <p style="font-size: 1.2rem;">Talvez não seja sobre quem você escolhe. Talvez seja sobre o que você aprendeu a aceitar.</p>
-            
-            <div style="margin: 2rem 0;">
-                <p><strong>Responda com sinceridade:</strong></p>
-                <ul style="list-style: none; padding-left: 1rem;">
-                    <li style="margin-bottom: 0.5rem;">• Seu corpo fica em alerta quando ele se afasta?</li>
-                    <li style="margin-bottom: 0.5rem;">• Você se esforça para manter a relação em equilíbrio sozinha?</li>
-                    <li style="margin-bottom: 0.5rem;">• Se adapta para evitar conflito, mesmo se machucando?</li>
-                    <li style="margin-bottom: 0.5rem;">• Sente medo de ser trocada ou enganada?</li>
-                </ul>
-            </div>
+<!-- NAV -->
+<nav>
+  <img src="https://i.postimg.cc/d1Ly2Sx4/4P.png" alt="Cleo Louzada">
+</nav>
 
-            <div class="card">
-                <p style="font-size: 0.9rem; margin-bottom: 0;">Esse teste foi construído a partir de padrões emocionais que observo há anos no consultório. Mulheres fortes, inteligentes... que repetem histórias parecidas sem entender por quê.</p>
-            </div>
+<noscript>
+  <img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=497740334725857&ev=PageView&noscript=1"/>
+</noscript>
 
-            <div style="background-color: rgba(195, 138, 107, 0.1); padding: 1rem; border-radius: 4px; margin: 2rem 0; text-align: center;">
-                <p style="margin:0; font-size: 0.9rem;"><em>Este teste não define quem você é. Ele revela o mecanismo que você aprendeu para se proteger.</em></p>
-            </div>
+<div class="wrap">
 
-            <button class="btn" onclick="startQuiz()">DESCUBRA O SEU PADRÃO AFETIVO</button>
-        </section>
+  <!-- LANDING -->
+  <section id="landing">
+    <span class="label" style="display:block;margin-bottom:16px">Mapa Afetivo</span>
+    <h1>Você ama... mas se sente exausta dentro das suas relações?</h1>
+    <p style="font-size:1rem;color:var(--tx1);">Talvez não seja sobre quem você escolhe. Talvez seja sobre o que você aprendeu a aceitar.</p>
 
+    <div class="divider"></div>
 
-        <section id="quiz" class="hidden">
-            <div class="question-step">Pergunta <span id="q-number">1</span> de 7</div>
-            <div id="question-container" class="fade-in">
-                </div>
-        </section>
+    <p style="font-size:.82rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--tx3);margin-bottom:12px">Responda com sinceridade:</p>
+    <ul class="bullets">
+      <li>Seu corpo fica em alerta quando ele se afasta?</li>
+      <li>Você se esforça para manter a relação em equilíbrio sozinha?</li>
+      <li>Se adapta para evitar conflito, mesmo se machucando?</li>
+      <li>Sente medo de ser trocada ou enganada?</li>
+    </ul>
 
-
-        <section id="result" class="hidden fade-in">
-            <p style="text-align: center; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem;">Seu Padrão Dominante é:</p>
-            <h1 id="result-title" style="text-align: center; color: var(--cor-destaque); margin-bottom: 0.5rem;">Título</h1>
-            
-            <div class="quote" id="result-quote">"Frase"</div>
-
-            <div class="result-box">
-                <p id="result-text">Diagnóstico...</p>
-                <p id="result-origin" style="margin-top: 1.5rem; font-weight: 700;">A Origem: ...</p>
-                
-                <div class="print-instruction">
-                    <strong>⚠️ IMPORTANTE:</strong><br>
-                    Tire um print (captura de tela) deste resultado agora.<br>
-                    Ele será o nosso ponto de partida no<strong>Mapeamento afetivo</strong>.
-                </div>
-            </div>
-
-            <div class="sales-box">
-                <h2 style="text-align: center;">Se você se reconheceu aqui...</h2>
-                <p>Isso não significa que você ama errado. Significa que você aprendeu a amar a partir de uma ferida que nunca foi tratada.</p>
-                <p><strong>Feridas não resolvidas repetem histórias. E você não precisa repetir essa.</strong></p>
-                
-                <h3 style="text-align: center;">Eu criei o Mapeamento Afetivo para você</h3>
-                <p>Um encontro estruturado, individual e profundo (60 min) onde vamos:</p>
-                <ul class="check-list" style="list-style: none; padding-left: 0;">
-                    <li>☑ Mapear como esse padrão se formou na sua história</li>
-                    <li>☑ Identificar o ponto exato onde ele pode ser interrompido</li>
-                    <li>☑ Definir o caminho terapêutico adequado para você</li>
-                </ul>
-
-                <div class="price-tag">
-                    <span style="text-decoration: line-through; color: #999; font-size: 1rem;">De R$ 297</span><br>
-                    <strong>Por R$ 197</strong>
-                </div>
-
-                <p style="text-align: center; font-size: 0.9rem;"><em>Atendimento individual, online. Agenda com vagas limitadas.</em></p>
-
-                <a href="https://pay.kiwify.com.br/RT8AIt7" class="btn" target="_blank">QUERO O MEU MAPEAMENTO AFETIVO</a>
-                
-                <div style="background-color: #faf8f5; border: 1px solid #e0dcd5; border-left: 4px solid var(--cor-destaque); padding: 1.2rem; margin-top: 1.5rem; border-radius: 4px;">
-                    <p style="margin-bottom: 0.5rem; font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: bold; color: var(--cor-texto);">Bônus Exclusivo (Cashback)</p>
-                    <p style="font-size: 0.9rem; margin-bottom: 0; line-height: 1.5;">
-                        Se ao final da sessão decidirmos que você deve seguir no processo terapêutico completo comigo, o valor de <strong>R$ 350,00 será devolvido como desconto</strong> na sua próxima etapa.
-                    </p>
-                </div>
-            </div>
-
-            <div class="testimonial-box">
-                <div class="testimonial-header">
-                    <div class="stars">★★★★★</div>
-                    <span style="font-size: 0.8rem; color: #888; text-transform: uppercase; letter-spacing: 1px;">Relato Real</span>
-                </div>
-                <p class="testimonial-text">
-                    "Tô impressionada com o resultado deste teste. Resolvi fazer só por curiosidade e me surpreendi positivamente, mas por outro lado fiquei muito pensativa. Eu nunca imaginei que fosse a adaptável silenciosa... passou um filme na minha cabeça e agendei a sessão com a Cleo".<br><br>
-                    "Na sessão comecei a me lembrar da infância. Quando meu pai chegava em casa cansado, ele dizia que se eu quisesse ficar perto dele tinha que ficar quietinha. Isso explica por que me sinto tão oprimida numa relação com um marido irritadiço e reclamão... e eu sempre sendo paciente e relevando... nunca conseguindo me posicionar... agora vamos trabalhar pra mudar isso."
-                </p>
-                <p class="testimonial-author">- Clientes Anônimas (após o teste e a sessão de Mapeamento Afetivo)</p>
-            </div>
-
-            <div style="margin-top: 4rem; border-top: 1px solid #e0dcd5; padding-top: 2rem;">
-                <div style="display: flex; align-items: flex-start; gap: 1.5rem; flex-wrap: wrap;">
-                    
-                    <div style="flex: 0 0 100px;">
-                        <img src="https://i.postimg.cc/T3NGZGmL/eu.png" alt="Cleo Martins" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 2px solid var(--cor-destaque); background-color: #ddd;">
-                    </div>
-
-                    <div style="flex: 1;">
-                        <h3 style="margin-top: 0; color: var(--cor-texto);">Quem é Cleo Louzada?</h3>
-                        <p style="font-size: 0.9rem;">
-                            Sou <strong>Psicoterapeuta Integrativa</strong>, criadora do <strong>Método DNA Feminino</strong>.
-                        </p>
-                        <p style="font-size: 0.9rem;">
-                            Um modelo terapêutico estruturado para mapear a raiz emocional dos padrões afetivos e direcionar um processo de transformação com clareza.
-                        </p>
-                        <p style="font-size: 0.9rem;">
-                            Não trabalho apenas o sintoma. Investigo a estrutura que sustenta a repetição. Aqui você encontra método para interromper ciclos.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-        </section>
-
-        <div class="footer">
-            <p>&copy; 2026 Cleo Louzada | Psicoterapeuta Integrativa</p>
-        </div>
-
+    <div class="card">
+      <p style="margin:0;font-size:.85rem;">Esse teste foi construído a partir de padrões emocionais que observo há anos no consultório. Mulheres fortes, inteligentes... que repetem histórias parecidas sem entender por quê.</p>
     </div>
 
-    <script>
-        // DADOS DAS PERGUNTAS
-        const questions = [
-            {
-                text: "O que mais te cansa hoje em um relacionamento?",
-                options: [
-                    { text: "Ter que resolver tudo e sentir que carrego ele nas costas", axis: "A" },
-                    { text: "A incerteza de não saber se ele vai estar lá amanhã", axis: "B" },
-                    { text: "A desconfiança e a necessidade de ficar sempre alerta", axis: "C" },
-                    { text: "A sensação de pisar em ovos para não desagradar", axis: "D" }
-                ]
-            },
-            {
-                text: "Para você, intimidade segura parece ser:",
-                options: [
-                    { text: "Cuidar dele e garantir que ele precise de mim", axis: "A" },
-                    { text: "Ter a certeza constante de que está tudo bem entre nós", axis: "B" },
-                    { text: "Poder observar e analisar sem ser enganada", axis: "C" },
-                    { text: "Me adaptar para manter a harmonia e a paz", axis: "D" }
-                ]
-            },
-            {
-                text: "Quando surge um conflito, o que mais ativa em você?",
-                options: [
-                    { text: "A necessidade de consertar tudo rapidamente", axis: "A" },
-                    { text: "O medo paralisante de que isso seja o começo do fim", axis: "B" },
-                    { text: "A desconfiança de que pode haver algo escondido", axis: "C" },
-                    { text: "A vontade de minimizar o problema e dizer que está tudo bem, mesmo não estando", axis: "D" }
-                ]
-            },
-            {
-                text: "Se ele cresce, evolui e se torna mais independente, você sente:",
-                options: [
-                    { text: "Orgulho, mas também medo de perder seu papel de sustentação na vida dele", axis: "A" },
-                    { text: "Insegurança profunda sobre seu lugar na vida dele", axis: "B" },
-                    { text: "Necessidade de vigiar se essa mudança altera o comportamento dele", axis: "C" },
-                    { text: "Alívio por ele estar bem, mas sensação de vazio sobre quem você é fora desse cuidado", axis: "D" }
-                ]
-            },
-            {
-                text: "Quando você pensa em terminar um relacionamento ruim, o que mais pesa?",
-                options: [
-                    { text: "A sensação de que ele pode se perder ou não conseguir sem mim", axis: "A" },
-                    { text: "O vazio insuportável e a solidão que imagino sentir", axis: "B" },
-                    { text: "A dúvida cruel se ele realmente errou ou se eu estou exagerando", axis: "C" },
-                    { text: "O medo de nunca mais encontrar alguém que me aceite", axis: "D" }
-                ]
-            },
-            {
-                text: "No fundo, lá na sua intimidade, você acredita que para ser amada você precisa ser:",
-                options: [
-                    { text: "Útil, forte e indispensável", axis: "A" },
-                    { text: "Presente, intensa e colada nele", axis: "B" },
-                    { text: "Atenta, perfeita e vigilante", axis: "C" },
-                    { text: "Dócil, invisível e fácil de lidar", axis: "D" }
-                ]
-            },
-            // Pergunta 7 (Desempate - Vale 2 pontos)
-            {
-                text: "Para finalizar, das 4 frases abaixo, qual mexe mais com você neste momento?",
-                options: [
-                    { text: "Você está carregando todo mundo nas costas.", axis: "A" },
-                    { text: "Você está sozinha mesmo estando acompanhada.", axis: "B" },
-                    { text: "Você não consegue confiar de verdade.", axis: "C" },
-                    { text: "Você está invisível dentro da sua própria relação.", axis: "D" }
-                ]
-            }
-        ];
+    <div class="note">
+      <p>Este teste não define quem você é. Ele revela o mecanismo que você aprendeu para se proteger.</p>
+    </div>
 
-        // RESULTADOS
-        const resultsData = {
-            "A": {
-                title: "A Protetora Incansável",
-                quote: "Se eu não for necessária, posso deixar de ser escolhida.",
-                text: "Você aprendeu a amar cuidando. Resolve, orienta, sustenta. Muitas vezes assume o papel de forte mesmo quando está exausta. Existe uma parte sua que acredita que ser indispensável é a forma mais segura de manter alguém ao seu lado. O problema é que amor construído na necessidade gera cansaço, não parceria.",
-                origin: "Esse padrão geralmente nasce quando, cedo demais, você precisou ser 'madura' ou emocionalmente responsável por alguém da família."
-            },
-            "B": {
-                title: "A Buscadora de Confirmação",
-                quote: "Se ele se afastar, eu fico sozinha comigo.",
-                text: "Você sente intensamente quando há distância. Pequenos afastamentos geram grandes inseguranças. Existe um medo profundo de não ser escolhida, de não ser prioridade. Então você tenta se ajustar, se aproximar mais, entender demais... tudo para evitar o vazio. Mas quanto mais você tenta garantir o vínculo, mais ansiedade você sente.",
-                origin: "Esse padrão geralmente tem raízes em uma infância onde o afeto foi inconstante ou onde você sentiu solidão emocional."
-            },
-            "C": {
-                title: "A Vigilante Oculta",
-                quote: "Eu não confio, mas não consigo ir embora.",
-                text: "Você ama desconfiando. Analisa gestos, palavras, horários. No fundo, você está sempre esperando o momento em que a 'verdade' vai aparecer e você será decepcionada. Essa hipervigilância te dá uma falsa sensação de controle, mas te impede de relaxar e entregar seu coração de verdade. É exaustivo ser a detetive da própria relação.",
-                origin: "Geralmente ligado a quebras de confiança precoces ou a um ambiente familiar onde a mentira ou a traição eram presentes."
-            },
-            "D": {
-                title: "A Adaptável Silenciosa",
-                quote: "Se eu for eu mesma, ele vai embora.",
-                text: "Você se diminui para caber no mundo dele. Evita conflitos a qualquer custo, engole suas vontades e molda sua personalidade para ser a 'mulher ideal'. Você tem pavor de ser um peso ou de incomodar. O problema é que, ao tentar agradar a todo custo, você se torna invisível dentro da própria relação.",
-                origin: "Comum em histórias onde a criança aprendeu que só recebia afeto quando era 'boazinha', obediente ou invisível."
-            }
-        };
+    <button class="btn btn-terra" onclick="startQuiz()">Descubra o seu padrão afetivo</button>
+  </section>
 
-        let currentQuestion = 0;
-        let scores = { "A": 0, "B": 0, "C": 0, "D": 0 };
+  <!-- QUIZ -->
+  <section id="quiz">
+    <div class="progress-wrap">
+      <div class="progress-label">
+        <span class="label">Pergunta <span id="q-number">1</span> de 7</span>
+        <span class="label" id="q-percent">0%</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+      </div>
+    </div>
+    <div id="question-container"></div>
+  </section>
 
-        function startQuiz() {
-            document.getElementById('landing').classList.add('hidden');
-            document.getElementById('quiz').classList.remove('hidden');
-            showQuestion();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+  <!-- RESULT -->
+  <section id="result">
 
-        function showQuestion() {
-            const q = questions[currentQuestion];
-            document.getElementById('q-number').innerText = currentQuestion + 1;
-            
-            const container = document.getElementById('question-container');
-            container.innerHTML = `<h2 class="question-text">${q.text}</h2>`;
-            
-            q.options.forEach(opt => {
-                const btn = document.createElement('button');
-                btn.className = 'option';
-                btn.innerText = opt.text;
-                btn.onclick = () => selectOption(opt.axis);
-                container.appendChild(btn);
-            });
-            
-            container.classList.remove('fade-in');
-            void container.offsetWidth; 
-            container.classList.add('fade-in');
-        }
+    <span class="result-pattern-label">Seu Padrão Dominante é:</span>
+    <h1 class="result-title" id="result-title">—</h1>
+    <p class="result-quote" id="result-quote">"—"</p>
 
-        function selectOption(axis) {
-            // Lógica de Peso: Se for a última pergunta (índice 6), vale 2 pontos.
-            let points = (currentQuestion === 6) ? 2 : 1;
-            scores[axis] += points;
-            
-            if (currentQuestion < questions.length - 1) {
-                currentQuestion++;
-                showQuestion();
-            } else {
-                showResult();
-            }
-        }
+    <div class="result-box">
+      <p id="result-text"></p>
+      <p id="result-origin" style="margin-top:16px;font-weight:600;color:var(--choco);margin-bottom:0"></p>
+      <div class="print-box">
+        <strong>⚠️ Importante</strong><br>
+        Tire um print deste resultado agora.<br>
+        Ele será o nosso ponto de partida no <strong>Mapeamento Afetivo</strong>.
+      </div>
+    </div>
 
-        function showResult() {
-            document.getElementById('quiz').classList.add('hidden');
-            document.getElementById('result').classList.remove('hidden');
-            
-            // Lógica de Vencedor
-            let winner = Object.keys(scores).reduce((a, b) => scores[a] >= scores[b] ? a : b);
-            const data = resultsData[winner];
+    <!-- SALES -->
+    <div class="sales-box">
+      <h2 style="text-align:center">Se você se reconheceu aqui...</h2>
+      <p>Isso não significa que você ama errado. Significa que você aprendeu a amar a partir de uma ferida que nunca foi tratada.</p>
+      <p style="font-weight:600;color:var(--choco)">Feridas não resolvidas repetem histórias. E você não precisa repetir essa.</p>
 
-            document.getElementById('result-title').innerText = data.title;
-            document.getElementById('result-quote').innerText = `"${data.quote}"`;
-            document.getElementById('result-text').innerText = data.text;
-            document.getElementById('result-origin').innerText = data.origin;
-            
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            
-            // Dispara Pixel de Lead
-            if(typeof fbq === 'function') {
-                fbq('track', 'Lead'); 
-            }
-        }
-    </script>
+      <div class="divider" style="margin:20px auto"></div>
+
+      <h3 style="text-align:center">Eu criei o Mapeamento Afetivo para você</h3>
+      <p>Um encontro estruturado, individual e profundo (60 min) onde vamos:</p>
+
+      <ul class="check-list">
+        <li>Mapear como esse padrão se formou na sua história</li>
+        <li>Identificar o ponto exato onde ele pode ser interrompido</li>
+        <li>Definir o caminho terapêutico adequado para você</li>
+      </ul>
+
+      <div class="price-box">
+        <p class="price-value">R$ 350<span style="font-size:1.2rem">,00</span></p>
+        <p class="price-label">Sessão individual · Online · Vagas limitadas</p>
+      </div>
+
+      <a href="https://pay.kiwify.com.br/RT8AIt7" class="btn btn-terra" target="_blank">Quero o meu Mapeamento Afetivo</a>
+
+      <div class="cashback-box">
+        <span class="cashback-title">Bônus Exclusivo — Cashback</span>
+        <p>Se ao final da sessão decidirmos que você deve seguir no processo terapêutico completo comigo, o valor de <strong>R$ 350,00 será devolvido como desconto</strong> na sua próxima etapa.</p>
+      </div>
+    </div>
+
+    <!-- TESTIMONIAL -->
+    <div class="testimonial-box">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px">
+        <span class="stars">★★★★★</span>
+        <span class="label">Relato Real</span>
+      </div>
+      <p class="testimonial-text">
+        "Tô impressionada com o resultado deste teste. Resolvi fazer só por curiosidade e me surpreendi positivamente, mas por outro lado fiquei muito pensativa. Eu nunca imaginei que fosse a adaptável silenciosa... passou um filme na minha cabeça e agendei a sessão com a Cleo."<br><br>
+        "Na sessão comecei a me lembrar da infância. Quando meu pai chegava em casa cansado, ele dizia que se eu quisesse ficar perto dele tinha que ficar quietinha. Isso explica por que me sinto tão oprimida numa relação com um marido irritadiço e reclamão... e eu sempre sendo paciente e relevando... nunca conseguindo me posicionar... agora vamos trabalhar pra mudar isso."
+      </p>
+      <p class="testimonial-author">— Clientes anônimas · Após o teste e o Mapeamento Afetivo</p>
+    </div>
+
+    <!-- ABOUT -->
+    <div class="about-box">
+      <img src="https://i.postimg.cc/T3NGZGmL/eu.png" alt="Cleo Louzada" class="about-photo">
+      <div style="flex:1;min-width:200px">
+        <h3 style="margin-top:0">Quem é Cleo Louzada?</h3>
+        <p style="font-size:.84rem">Terapeuta graduada em Práticas Integrativas & Complementares, criadora do <strong>Método DNA Feminino</strong>.</p>
+        <p style="font-size:.84rem">Um modelo terapêutico estruturado para mapear a raiz emocional dos padrões afetivos e direcionar um processo de transformação com clareza.</p>
+        <p style="font-size:.84rem;margin-bottom:0">Não trabalho apenas o sintoma. Investigo a estrutura que sustenta a repetição.</p>
+      </div>
+    </div>
+
+  </section>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Cleo Louzada. Todos os direitos reservados.</p>
+</footer>
+
+<script>
+const questions = [
+  {
+    text: "O que mais te cansa hoje em um relacionamento?",
+    options: [
+      { text: "Ter que resolver tudo e sentir que carrego ele nas costas", axis: "A" },
+      { text: "A incerteza de não saber se ele vai estar lá amanhã", axis: "B" },
+      { text: "A desconfiança e a necessidade de ficar sempre alerta", axis: "C" },
+      { text: "A sensação de pisar em ovos para não desagradar", axis: "D" }
+    ]
+  },
+  {
+    text: "Para você, intimidade segura parece ser:",
+    options: [
+      { text: "Cuidar dele e garantir que ele precise de mim", axis: "A" },
+      { text: "Ter a certeza constante de que está tudo bem entre nós", axis: "B" },
+      { text: "Poder observar e analisar sem ser enganada", axis: "C" },
+      { text: "Me adaptar para manter a harmonia e a paz", axis: "D" }
+    ]
+  },
+  {
+    text: "Quando surge um conflito, o que mais ativa em você?",
+    options: [
+      { text: "A necessidade de consertar tudo rapidamente", axis: "A" },
+      { text: "O medo paralisante de que isso seja o começo do fim", axis: "B" },
+      { text: "A desconfiança de que pode haver algo escondido", axis: "C" },
+      { text: "A vontade de minimizar o problema e dizer que está tudo bem, mesmo não estando", axis: "D" }
+    ]
+  },
+  {
+    text: "Se ele cresce, evolui e se torna mais independente, você sente:",
+    options: [
+      { text: "Orgulho, mas também medo de perder seu papel de sustentação na vida dele", axis: "A" },
+      { text: "Insegurança profunda sobre seu lugar na vida dele", axis: "B" },
+      { text: "Necessidade de vigiar se essa mudança altera o comportamento dele", axis: "C" },
+      { text: "Alívio por ele estar bem, mas sensação de vazio sobre quem você é fora desse cuidado", axis: "D" }
+    ]
+  },
+  {
+    text: "Quando você pensa em terminar um relacionamento ruim, o que mais pesa?",
+    options: [
+      { text: "A sensação de que ele pode se perder ou não conseguir sem mim", axis: "A" },
+      { text: "O vazio insuportável e a solidão que imagino sentir", axis: "B" },
+      { text: "A dúvida cruel se ele realmente errou ou se eu estou exagerando", axis: "C" },
+      { text: "O medo de nunca mais encontrar alguém que me aceite", axis: "D" }
+    ]
+  },
+  {
+    text: "No fundo, lá na sua intimidade, você acredita que para ser amada você precisa ser:",
+    options: [
+      { text: "Útil, forte e indispensável", axis: "A" },
+      { text: "Presente, intensa e colada nele", axis: "B" },
+      { text: "Atenta, perfeita e vigilante", axis: "C" },
+      { text: "Dócil, invisível e fácil de lidar", axis: "D" }
+    ]
+  },
+  {
+    text: "Para finalizar, das 4 frases abaixo, qual mexe mais com você neste momento?",
+    options: [
+      { text: "Você está carregando todo mundo nas costas.", axis: "A" },
+      { text: "Você está sozinha mesmo estando acompanhada.", axis: "B" },
+      { text: "Você não consegue confiar de verdade.", axis: "C" },
+      { text: "Você está invisível dentro da sua própria relação.", axis: "D" }
+    ]
+  }
+];
+
+const resultsData = {
+  "A": {
+    title: "A Protetora Incansável",
+    quote: "Se eu não for necessária, posso deixar de ser escolhida.",
+    text: "Você aprendeu a amar cuidando. Resolve, orienta, sustenta. Muitas vezes assume o papel de forte mesmo quando está exausta. Existe uma parte sua que acredita que ser indispensável é a forma mais segura de manter alguém ao seu lado. O problema é que amor construído na necessidade gera cansaço, não parceria.",
+    origin: "Esse padrão geralmente nasce quando, cedo demais, você precisou ser 'madura' ou emocionalmente responsável por alguém da família."
+  },
+  "B": {
+    title: "A Buscadora de Confirmação",
+    quote: "Se ele se afastar, eu fico sozinha comigo.",
+    text: "Você sente intensamente quando há distância. Pequenos afastamentos geram grandes inseguranças. Existe um medo profundo de não ser escolhida, de não ser prioridade. Então você tenta se ajustar, se aproximar mais, entender demais... tudo para evitar o vazio. Mas quanto mais você tenta garantir o vínculo, mais ansiedade você sente.",
+    origin: "Esse padrão geralmente tem raízes em uma infância onde o afeto foi inconstante ou onde você sentiu solidão emocional."
+  },
+  "C": {
+    title: "A Vigilante Oculta",
+    quote: "Eu não confio, mas não consigo ir embora.",
+    text: "Você ama desconfiando. Analisa gestos, palavras, horários. No fundo, você está sempre esperando o momento em que a 'verdade' vai aparecer e você será decepcionada. Essa hipervigilância te dá uma falsa sensação de controle, mas te impede de relaxar e entregar seu coração de verdade. É exaustivo ser a detetive da própria relação.",
+    origin: "Geralmente ligado a quebras de confiança precoces ou a um ambiente familiar onde a mentira ou a traição eram presentes."
+  },
+  "D": {
+    title: "A Adaptável Silenciosa",
+    quote: "Se eu for eu mesma, ele vai embora.",
+    text: "Você se diminui para caber no mundo dele. Evita conflitos a qualquer custo, engole suas vontades e molda sua personalidade para ser a 'mulher ideal'. Você tem pavor de ser um peso ou de incomodar. O problema é que, ao tentar agradar a todo custo, você se torna invisível dentro da própria relação.",
+    origin: "Comum em histórias onde a criança aprendeu que só recebia afeto quando era 'boazinha', obediente ou invisível."
+  }
+};
+
+let currentQuestion = 0;
+let scores = { "A": 0, "B": 0, "C": 0, "D": 0 };
+
+function startQuiz() {
+  document.getElementById('landing').classList.add('hidden');
+  document.getElementById('quiz').style.display = 'block';
+  showQuestion();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function showQuestion() {
+  const q = questions[currentQuestion];
+  const num = currentQuestion + 1;
+  const pct = Math.round((currentQuestion / questions.length) * 100);
+
+  document.getElementById('q-number').innerText = num;
+  document.getElementById('q-percent').innerText = pct + '%';
+  document.getElementById('progress-fill').style.width = pct + '%';
+
+  const container = document.getElementById('question-container');
+  container.innerHTML = `<p class="question-text">${q.text}</p>`;
+
+  q.options.forEach(opt => {
+    const btn = document.createElement('button');
+    btn.className = 'option';
+    btn.innerText = opt.text;
+    btn.onclick = () => selectOption(opt.axis);
+    container.appendChild(btn);
+  });
+
+  container.classList.remove('fade-up');
+  void container.offsetWidth;
+  container.classList.add('fade-up');
+}
+
+function selectOption(axis) {
+  let points = (currentQuestion === 6) ? 2 : 1;
+  scores[axis] += points;
+
+  if (currentQuestion < questions.length - 1) {
+    currentQuestion++;
+    showQuestion();
+  } else {
+    showResult();
+  }
+}
+
+function showResult() {
+  document.getElementById('quiz').style.display = 'none';
+  document.getElementById('result').style.display = 'block';
+
+  let winner = Object.keys(scores).reduce((a, b) => scores[a] >= scores[b] ? a : b);
+  const data = resultsData[winner];
+
+  document.getElementById('result-title').innerText = data.title;
+  document.getElementById('result-quote').innerText = `"${data.quote}"`;
+  document.getElementById('result-text').innerText = data.text;
+  document.getElementById('result-origin').innerText = data.origin;
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  if (typeof fbq === 'function') {
+    fbq('track', 'Lead');
+  }
+}
+</script>
+
 </body>
 </html>
